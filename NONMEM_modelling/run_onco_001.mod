@@ -44,10 +44,10 @@ $PRED ;;; 2 CELL LINEs
       	IF(DRUG .EQ. 1)   IC50_DRUG = THETA(11) 	;reference --- 1 FIX
       	IF(DRUG .EQ. 1)  GAMMA_DRUG = THETA(12) 	;reference --- 1 FIX
 
-	IF(DRUG .EQ. 2)    TOP_DRUG = THETA(13) 	;reference --- 1 FIX
-      	IF(DRUG .EQ. 2) BOTTOM_DRUG = THETA(14) 	;reference --- 1 FIX
-      	IF(DRUG .EQ. 2)   IC50_DRUG = THETA(15) 	;reference --- 1 FIX
-      	IF(DRUG .EQ. 2)  GAMMA_DRUG = THETA(16) 	;reference --- 1 FIX
+	IF(DRUG .EQ. 2)    TOP_DRUG = THETA(13) 	
+      	IF(DRUG .EQ. 2) BOTTOM_DRUG = THETA(14) 	
+      	IF(DRUG .EQ. 2)   IC50_DRUG = THETA(15) 	
+      	IF(DRUG .EQ. 2)  GAMMA_DRUG = THETA(16) 	
 
 
       ;;; ADDITIVE ATUX effect
