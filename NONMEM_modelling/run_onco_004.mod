@@ -1,5 +1,9 @@
-;; 1. Based on: Zhigang's example
-;; 2. Description: Modelling combination effect of Erlotinib and Dactolisib with ATUX
+
+;; 1. Based on: run_onco_003
+;; 2. Description: Erlotinib and Dactolisib with ATUX base model
+;; x1. Author: My-Luong.Vuong
+
+
 ;; 3. Label: CELLINE_DRUG_ADDITIVE_ADDITIVECONC as ID
 ;; 4. Author: My-Luong Vuong
 
@@ -108,69 +112,64 @@ $PRED ;;; 2 CELL LINEs
 	IWRES = IRES / W
 
 $THETA
-	(1) FIX 	; reference cell line WT THETA(1)
-	(1) FIX 	; reference cell line WT
-	(1) FIX 	; reference cell line WT
-	(1) FIX 	; reference cell line WT
-	(0, 1.02) 	; THETA(5)
-	(0, 1.19) 	;
-	(0, 1.17) 	;
-	(0, 1.03) 	;
-	(1) FIX 	; reference Dactolisib THETA(9)
-	(1) FIX 	; reference Dactolisib
-	(1) FIX 	; reference Dactolisib
-	(1) FIX 	; reference Dactolisib
-	(0, 1.24) 	; THETA(13)
-	(0, 2.34) 	;
-	(0, 206) 	;
-	(0, 0.647) 	;
-	(0, 0.986) 	; THETA(17)
-	(0, 0.128) 	;
-	(0, 1.66) 	;
-	(0, 5.38) 	;
-	(0, 0.945) 	; THETA(21)
-	(0, 0.135) 	;
-	(0, 1.5) 	;
-	(0, 4.84) 	;
-	(0, 0.812) 	; THETA(25)
-	(0, 0.14) 	;
-	(0, 1.6) 	;
-	(0, 4.54) 	;
-	(0, 0.508) 	; THETA(29)
-	(0, 0.127) 	;
-	(0, 1.91) 	;
-	(0, 3.9) 	;
-
+(1) FIX ;reference cell line WT THETA(1)
+(1) FIX ;reference cell line WT
+(1) FIX ;reference cell line WT
+(1) FIX ;reference cell line WT
+(0, 1.01) ;THETA(5)
+(0, 1.19) ;
+(0, 1.87) ;
+(0, 1.06) ;
+(1) FIX ;reference Dactolisib THETA(9)
+(1) FIX ;reference Dactolisib
+(1) FIX ;reference Dactolisib
+(1) FIX ;reference Dactolisib
+(0, 1.23) ;THETA(13)
+(0, 2.37) ;
+(0, 330) ;
+(0, 1.42) ;
+(0, 0.997) ;THETA(17)
+(0, 0.098) ;
+(0, 0.0108) ;
+(0, 1.05) ;
+(0, 0.901) ;THETA(21)
+(0, 0.0888) ;
+(0, 0.00823) ;
+(0, 0.931) ;
+(0, 0.961) ;THETA(25)
+(0, 0.106) ;
+(0, 0.00729) ;
+(0, 1.01) ;
+(0, 0.809) ;THETA(29)
+(0, 0.108) ;
+(0, 0.0071) ;
+(0, 0.949) ;
 
 $OMEGA	;;; inter-experiment variability
- 	0 FIX 
- 	0.00427
- 	0.0355
- 	0.00515 ; 
-
-$OMEGA BLOCK(1) 0.00912 ; inter-day variability TOP  = intra-experiment variability
+ 0 FIX 
+ 0 FIX 
+ 0 FIX 
+ 0 FIX  ; 
+$OMEGA BLOCK(1) 0 FIX ; inter-day variability TOP  = intra-experiment variability
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
-
-$OMEGA BLOCK(1) 0.0542 ; inter-day variability BOTTOM
+$OMEGA BLOCK(1) SAME ; inter-day variability BOTTOM
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
-
-$OMEGA BLOCK(1) 0.0524 ; inter-day variability IC50
+$OMEGA BLOCK(1) SAME ; inter-day variability IC50
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
-
-$OMEGA BLOCK(1) 0.0508 ; inter-day variability GAMMA
+$OMEGA BLOCK(1) SAME  ; inter-day variability GAMMA
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
 $OMEGA BLOCK(1) SAME
 
 $SIGMA ;;; residual variability
-	0.00986 
-	0 FIX 
+ 0.049 
+ 0.02 
 
 $COVARIANCE PRINT=E UNCONDITIONAL ;MATRIX=R
 
@@ -181,5 +180,5 @@ DV Y PRED IPRED IRES IWRES CWRES
 TOP BOTTOM IC50 GAMMA
 TVTOP TVBOTTOM TVIC50 TVGAMMA
 IMAX ETA(1) ETA(2) ETA(3) ETA(4)
-ONEHEADER NOPRINT FILE = onco_combine_therapy_out.csv
+ONEHEADER NOPRINT FILE = onco_combine_therapy_out_004.csv
 
