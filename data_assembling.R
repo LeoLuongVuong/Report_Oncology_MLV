@@ -1,3 +1,21 @@
+
+# VSC user day 130624 ----
+
+# packrat: Helps manage package dependencies in R projects
+install.packages("packrat")
+packrat::init()
+
+.libPaths() # check the library paths
+
+# renv: A modern replacement for packrat
+install.packages("renv")
+renv::init()
+
+# Use tools like lintr to analyze your code for potential issues and to 
+# identify dependencies.
+install.packages("lintr")
+lintr::lint("data_assembling.R") # for aesthetic reason only
+
 # Load packages ----
 library(readxl)
 library(tidyverse)
@@ -295,32 +313,34 @@ onco_IPRED_DV <- ggplot(data = onco_combine_therapy_out, aes(x = (IPRED), y = (D
   facet_grid(~CELLINE) +
   geom_point(colour = "dodgerblue", shape = 1, size = 2, alpha = 0.5) +
   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
-  scale_x_continuous(limits = c(0, 2.15), breaks = seq(0, 999, by = 0.5)) +
-  scale_y_continuous(limits = c(0, 2.15), breaks = seq(0, 999, by = 0.5)) +
+  scale_x_continuous(limits = c(0, 1.7), breaks = seq(0, 1.7, by = 0.4), expand = c(0,0.01)) +
+  scale_y_continuous(limits = c(0, 2.5), breaks = seq(0, 2.5, by = 0.5), expand = c(0,0.01)) +
   geom_smooth(se = F, aes(colour = "red"), method = "loess", size = 1.2) +
   theme_bw() +
   theme(legend.position = "none") +
-  theme(text = element_text(size = 18)) +
+  theme(text = element_text(size = 18),
+        panel.spacing = unit(1, "lines")) +
   labs(x = "Predicted cell viability", y = "Observed cell viability")
 onco_IPRED_DV
 ggsave('onco_IPRED_DV.png', onco_IPRED_DV , device = "png", width = 16, height = 4, dpi = 300)
 
-onco_PRED_CWRES <- ggplot(data = onco_combine_therapy_out, aes(x = PRED, y = CWRES)) + 
+onco_IPRED_CWRES <- ggplot(data = onco_combine_therapy_out, aes(x = IPRED, y = CWRES)) + 
   #choose:
   facet_grid(~CELLINE) +
   geom_point(colour = "dodgerblue", shape = 1, size = 2, alpha = 0.8) +
   geom_abline(intercept = 0, slope = 0) +
-  scale_x_continuous(limits = c(0.001, 1.2), breaks = seq(-100, 999, by = 0.2)) +
-  scale_y_continuous(limits = c(-15, 15), breaks = seq(-100, 999, by = 5)) +
+  scale_x_continuous(limits = c(0, 1.7), breaks = seq(0, 1.7, by = 0.2), expand = c(0,0.01)) +
+  scale_y_continuous(limits = c(-15, 15), breaks = seq(-100, 999, by = 5), expand = c(0,0.01)) +
   geom_smooth(se = F, aes(colour = "red"), method = "loess", size = 1.2) +
   theme_bw() +
   theme(legend.position = "none") +
-  theme(text = element_text(size = 18)) +
+  theme(text = element_text(size = 18),
+        panel.spacing = unit(1, "lines")) +
   geom_abline(intercept = -5, slope = 0, linetype = "dashed") +
   geom_abline(intercept =  5, slope = 0, linetype = "dashed") +
   labs(x = "Predicted cell viability", y = "CWRES")
-onco_PRED_CWRES
-ggsave('onco_PRED_CWRES.png', onco_PRED_CWRES, device = "png", width = 16, height = 4, dpi = 500)
+onco_IPRED_CWRES
+ggsave('onco_IPRED_CWRES.png', onco_IPRED_CWRES, device = "png", width = 16, height = 4, dpi = 500)
 
 
 ## define the equations for effect curve ----
