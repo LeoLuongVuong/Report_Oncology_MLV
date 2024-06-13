@@ -4,8 +4,9 @@
 # packrat: Helps manage package dependencies in R projects
 install.packages("packrat")
 packrat::init()
-
+library(packrat)
 .libPaths() # check the library paths
+
 
 # renv: A modern replacement for packrat
 install.packages("renv")
@@ -15,6 +16,9 @@ renv::init()
 # identify dependencies.
 install.packages("lintr")
 lintr::lint("data_assembling.R") # for aesthetic reason only
+
+# these 3 only help on packages management or aesthetics.
+# should look at R profillers instead.
 
 # Load packages ----
 library(readxl)
